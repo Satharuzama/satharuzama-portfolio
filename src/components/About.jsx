@@ -98,7 +98,7 @@ export default function About() {
               {portraitSrc ? (
                 <img
                   src={portraitSrc}
-                  alt={`${personalInfo.name} — ${personalInfo.role}`}
+                  alt="Shek Sataruzama — Java Full Stack Developer, TAP Academy student"
                   className="w-full h-full object-cover grayscale contrast-125 transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
