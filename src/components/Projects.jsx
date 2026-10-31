@@ -1,0 +1,213 @@
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { projects } from '../data/portfolioData'
+import ScrambleText from './ScrambleText'
+
+gsap.registerPlugin(ScrollTrigger)
+
+// Load project images dynamically if available
+const projectImages = import.meta.glob('../assets/projects/project-*.*', {
+  eager: true,
+  import: 'default',
+})
+
+function getProjectImage(id) {
+  const match = Object.entries(projectImages).find(([path]) =>
+    path.includes(`/${id}.`),
+  )
+  return match ? match[1] : null
+}
+
+export default function Projects() {
+  const sectionRef = useRef(null)
+  const trackRef = useRef(null)
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const section = sectionRef.current
+    const track = trackRef.current
+
+    if (!section || !track) return
+
+    const mm = gsap.matchMedia()
+
+    // Desktop view (≥ 1024px): Pin the section and scrub cards horizontally
+    mm.add('(min-width: 1024px)', () => {
+      if (prefersReducedMotion) {
+        return
+      }
+
+      const getScrollAmount = () => track.scrollWidth - window.innerWidth + 120
+
+      const tween = gsap.to(track, {
+        x: () => -getScrollAmount(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          scrub: 1,
+          start: 'top top',
+          end: () => `+=${getScrollAmount()}`,
+          invalidateOnRefresh: true,
+        },
+      })
+
+      return () => {
+        tween.kill()
+      }
+    })
+
+    // Mobile view (< 1024px): Simple vertical scroll with stagger entrance
+    mm.add('(max-width: 1023px)', () => {
+      const cards = track.querySelectorAll('.project-card')
+      cards.forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
+          },
+        )
+      })
+    })
+
+    return () => mm.revert()
+  }, [])
+
+  return (
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="w-full relative py-28 md:py-40 border-t border-bone/10 overflow-hidden"
+    >
+      {/* Section Header */}
+      <div className="max-w-[1440px] mx-auto px-5 md:px-10 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <ScrambleText
+            text="02 / Projects"
+            className="font-mono text-xs uppercase tracking-[0.3em] text-signal font-medium mb-4 block"
+          />
+          <h2 className="text-[clamp(2.4rem,5vw,4.5rem)] font-bold leading-[1.02] tracking-[-0.03em] text-bone">
+            Selected Works.
+          </h2>
+        </div>
+
+        <span className="font-mono text-xs text-dim uppercase tracking-widest hidden md:inline-block">
+          ({projects?.length || 0} FEATURED)
+        </span>
+      </div>
+
+      {/* Projects Track (Horizontally pinned on Desktop, Vertical Stack on Mobile) */}
+      <div
+        ref={trackRef}
+        className="flex flex-col lg:flex-row gap-8 px-5 md:px-10 w-full lg:w-max max-w-[1440px] lg:max-w-none mx-auto"
+      >
+        {projects?.map((project) => {
+          const imageSrc = getProjectImage(project.id)
+
+          return (
+            <div
+              key={project.id}
+              className="project-card w-full lg:w-[480px] shrink-0 hud-frame border border-bone/10 bg-panel p-6 md:p-8 flex flex-col justify-between transition-colors hover:border-bone/25"
+            >
+              <div>
+                {/* Visual Cover / HUD Placeholder */}
+                <div className="w-full h-48 md:h-56 bg-ink/70 border border-bone/10 mb-6 overflow-hidden relative flex items-center justify-center">
+                  {imageSrc ? (
+                    <img
+                      src={imageSrc}
+                      alt={`${project.title} screenshot`}
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center font-mono text-xs text-dim p-4 text-center">
+                      <span className="text-signal font-semibold mb-1">
+                        [{project.number} · HUD_CORE]
+                      </span>
+                      <span className="text-[11px] tracking-wider">
+                        {project.tags?.[0] || 'FULL STACK'}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Number & Year Header */}
+                <div className="flex items-center justify-between font-mono text-xs text-dim mb-3">
+                  <span className="text-signal font-bold">{project.number}</span>
+                  <span className="tracking-widest">{project.year}</span>
+                </div>
+
+                {/* Project Title */}
+                <h3 className="text-2xl font-bold text-bone mb-3 tracking-tight">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-bone/70 text-sm md:text-base leading-relaxed mb-6">
+                  {project.description}
+                </p>
+              </div>
+
+              <div>
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tags?.map((tag) => (
+                    <span
+                      key={tag}
+                      className="border border-bone/15 px-2.5 py-1 font-mono text-xs text-bone/80"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links */}
+                <div className="flex items-center gap-5 pt-4 border-t border-bone/10 font-mono text-xs">
+                  {project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-bone hover:text-signal uppercase tracking-wider transition-colors inline-flex items-center gap-1"
+                    >
+                      <span>Live Demo</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : null}
+
+                  {project.githubUrl ? (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-bone hover:text-signal uppercase tracking-wider transition-colors inline-flex items-center gap-1"
+                    >
+                      <span>Repository</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : null}
+
+                  {!project.liveUrl && !project.githubUrl && (
+                    <span className="text-dim uppercase tracking-wider text-[11px]">
+                      Active In Development
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
