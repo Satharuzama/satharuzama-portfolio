@@ -104,6 +104,20 @@ export const experience = [
     description:
       "Completed my Bachelor of Computer Applications, gaining foundational knowledge in programming, database management, software engineering, and web development.",
   },
+  {
+    period: "2021 — 2023",
+    role: "Intermediate (MPC)",
+    org: "Sri Chaitanya Junior College",
+    description:
+      "Completed Intermediate education in Mathematics, Physics, and Chemistry.",
+  },
+  {
+    period: "2021",
+    role: "High School",
+    org: "Prashanth English Medium High School",
+    description:
+      "Completed secondary school education (Class 10).",
+  },
 ]
 
 export const contactContent = {
