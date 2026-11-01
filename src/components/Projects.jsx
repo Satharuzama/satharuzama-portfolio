@@ -32,13 +32,35 @@ export default function Projects() {
 
     const mm = gsap.matchMedia()
 
-    // Desktop view (≥ 1024px): Pin the section and scrub cards horizontally
+    // Desktop view (≥ 1024px): Pin and scrub horizontally IF content exceeds viewport
     mm.add('(min-width: 1024px)', () => {
       if (prefersReducedMotion) {
         return
       }
 
       const getScrollAmount = () => track.scrollWidth - window.innerWidth + 120
+      const scrollAmount = getScrollAmount()
+
+      if (scrollAmount <= 0) {
+        // Content fits on screen — standard smooth entrance reveal
+        gsap.fromTo(
+          track.querySelectorAll('.project-card'),
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger: 0.15,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 75%',
+              once: true,
+            },
+          },
+        )
+        return
+      }
 
       const tween = gsap.to(track, {
         x: () => -getScrollAmount(),
@@ -58,7 +80,7 @@ export default function Projects() {
       }
     })
 
-    // Mobile view (< 1024px): Simple vertical scroll with stagger entrance
+    // Mobile & Tablet view (< 1024px): Clean vertical scroll with stagger entrance
     mm.add('(max-width: 1023px)', () => {
       const cards = track.querySelectorAll('.project-card')
       cards.forEach((card) => {
@@ -106,10 +128,10 @@ export default function Projects() {
         </span>
       </div>
 
-      {/* Projects Track (Horizontally pinned on Desktop, Vertical Stack on Mobile) */}
+      {/* Projects Track (Balanced grid on tablet/desktop, vertical stack on mobile) */}
       <div
         ref={trackRef}
-        className="flex flex-col lg:flex-row gap-8 px-5 md:px-10 w-full lg:w-max max-w-[1440px] lg:max-w-none mx-auto"
+        className="flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row gap-8 px-5 md:px-10 w-full max-w-[1440px] mx-auto"
       >
         {projects?.map((project) => {
           const imageSrc = getProjectImage(project.id)
@@ -117,7 +139,7 @@ export default function Projects() {
           return (
             <div
               key={project.id}
-              className="project-card w-full lg:w-[480px] shrink-0 hud-frame border border-bone/10 bg-panel p-6 md:p-8 flex flex-col justify-between transition-colors hover:border-bone/25"
+              className="project-card w-full lg:flex-1 lg:max-w-[640px] hud-frame border border-bone/10 bg-panel p-6 md:p-8 flex flex-col justify-between transition-colors hover:border-bone/25 group"
             >
               <div>
                 {/* Visual Cover / HUD Placeholder */}
@@ -126,7 +148,7 @@ export default function Projects() {
                     <img
                       src={imageSrc}
                       alt={`${project.title} screenshot`}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
                   ) : (
@@ -164,14 +186,14 @@ export default function Projects() {
                   {project.tags?.map((tag) => (
                     <span
                       key={tag}
-                      className="border border-bone/15 px-2.5 py-1 font-mono text-xs text-bone/80"
+                      className="border border-bone/15 px-2.5 py-1 font-mono text-xs text-bone/80 bg-ink/40"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                {/* Links */}
+                {/* Links / Status Indicator */}
                 <div className="flex items-center gap-5 pt-4 border-t border-bone/10 font-mono text-xs">
                   {project.liveUrl ? (
                     <a
@@ -198,9 +220,10 @@ export default function Projects() {
                   ) : null}
 
                   {!project.liveUrl && !project.githubUrl && (
-                    <span className="text-dim uppercase tracking-wider text-[11px]">
-                      Active In Development
-                    </span>
+                    <div className="flex items-center gap-2 text-dim font-mono text-[11px] uppercase tracking-wider">
+                      <span className="w-1.5 h-1.5 rounded-full bg-signal/80 animate-pulse" aria-hidden="true" />
+                      <span>In Active Development</span>
+                    </div>
                   )}
                 </div>
               </div>

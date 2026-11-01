@@ -15,18 +15,12 @@ const portraitSrc = Object.values(portraitModules)[0] || null
 
 export default function About() {
   const sectionRef = useRef(null)
-  const statsRefs = useRef([])
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     // If reduced motion is preferred, display immediately without scroll animations
     if (prefersReducedMotion) {
-      statsRefs.current.forEach((el, index) => {
-        if (el) {
-          el.textContent = aboutContent.stats?.[index]?.value ?? 0
-        }
-      })
       gsap.set('[data-about="reveal"]', { opacity: 1, y: 0 })
       return
     }
@@ -49,27 +43,6 @@ export default function About() {
           },
         },
       )
-
-      // Count-up animation for numeric metrics
-      statsRefs.current.forEach((el, index) => {
-        if (!el) return
-        const targetValue = aboutContent.stats?.[index]?.value ?? 0
-        const counter = { val: 0 }
-
-        gsap.to(counter, {
-          val: targetValue,
-          duration: 1.6,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            once: true,
-          },
-          onUpdate: () => {
-            el.textContent = Math.round(counter.val)
-          },
-        })
-      })
     }, sectionRef)
 
     return () => ctx.revert()
@@ -92,13 +65,13 @@ export default function About() {
 
         {/* Two-Column Responsive Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 items-start">
-          {/* LEFT: Portrait in .hud-frame */}
-          <div data-about="reveal" className="w-full flex justify-center lg:justify-start">
+          {/* LEFT: Portrait in .hud-frame (Sticky on desktop) */}
+          <div data-about="reveal" className="w-full flex justify-center lg:justify-start lg:sticky lg:top-28">
             <div className="hud-frame aspect-[4/5] max-w-[420px] w-full border border-bone/10 bg-panel overflow-hidden relative group">
               {portraitSrc ? (
                 <img
                   src={portraitSrc}
-                  alt="Shek Sataruzama — Java Full Stack Developer, TAP Academy student"
+                  alt={`${personalInfo.name} — ${personalInfo.role}`}
                   className="w-full h-full object-cover grayscale contrast-125 transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
@@ -125,7 +98,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* RIGHT: Heading, Bio Paragraph, Count-up Stats, Skill Modules */}
+          {/* RIGHT: Heading, Bio Paragraph, Technical Skill Modules */}
           <div className="flex flex-col">
             {/* Heading */}
             <h2
@@ -138,74 +111,60 @@ export default function About() {
             {/* Paragraph */}
             <p
               data-about="reveal"
-              className="text-lg md:text-xl leading-relaxed text-bone/75 max-w-2xl mb-10 whitespace-pre-line"
+              className="text-lg md:text-xl leading-relaxed text-bone/75 max-w-2xl mb-12 whitespace-pre-line"
             >
               {aboutContent.paragraph}
             </p>
 
-            {/* Numeric Stats */}
-            {aboutContent.stats?.length > 0 && (
-              <dl
-                data-about="reveal"
-                className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 border-y border-bone/10 py-8 mb-12"
-              >
-                {aboutContent.stats.map((stat, idx) => (
-                  <div key={stat.label} className="flex flex-col">
-                    <div className="text-4xl md:text-6xl font-bold text-bone flex items-baseline tracking-tight">
-                      <span
-                        ref={(el) => {
-                          statsRefs.current[idx] = el
-                        }}
-                        className="tabular-nums"
-                      >
-                        0
-                      </span>
-                      {stat.suffix && (
-                        <span className="text-signal ml-0.5">{stat.suffix}</span>
-                      )}
-                    </div>
-                    <dt className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-dim mt-2">
-                      {stat.label}
-                    </dt>
-                  </div>
-                ))}
-              </dl>
-            )}
-
             {/* Technical Skill Groups Grid */}
             {skillGroups?.length > 0 && (
-              <div
-                data-about="reveal"
-                className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-bone/10 border border-bone/10"
-              >
-                {skillGroups.map((group, groupIdx) => (
-                  <div
-                    key={group.title}
-                    className="bg-ink p-6 hover:bg-panel transition-colors flex flex-col justify-between"
-                  >
-                    {/* Header Row */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-signal font-semibold">
-                        {group.title}
-                      </span>
-                      <span className="font-mono text-xs text-dim tracking-wider" aria-hidden="true">
-                        {String(groupIdx + 1).padStart(2, '0')}
-                      </span>
-                    </div>
+              <div data-about="reveal" className="flex flex-col gap-4">
+                <div className="flex items-center justify-between border-b border-bone/10 pb-3">
+                  <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal font-medium">
+                    Technical Capabilities
+                  </span>
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-dim">
+                    {skillGroups.length} Core Domains
+                  </span>
+                </div>
 
-                    {/* Skill Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {group.items.map((skill) => (
-                        <span
-                          key={skill}
-                          className="border border-bone/15 px-2.5 py-1 font-mono text-xs text-bone/90 hover:border-signal/50 hover:text-signal transition-colors cursor-default"
-                        >
-                          {skill}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-bone/10 border border-bone/10">
+                  {skillGroups.map((group, groupIdx) => (
+                    <div
+                      key={group.title}
+                      className={`bg-ink p-6 hover:bg-panel transition-colors flex flex-col justify-between ${
+                        groupIdx === skillGroups.length - 1 && skillGroups.length % 2 !== 0
+                          ? 'sm:col-span-2'
+                          : ''
+                      }`}
+                    >
+                      {/* Header Row */}
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-signal font-semibold">
+                          {group.title}
                         </span>
-                      ))}
+                        <span
+                          className="font-mono text-xs text-dim tracking-wider"
+                          aria-hidden="true"
+                        >
+                          {String(groupIdx + 1).padStart(2, '0')}
+                        </span>
+                      </div>
+
+                      {/* Skill Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {group.items.map((skill) => (
+                          <span
+                            key={skill}
+                            className="border border-bone/15 px-3 py-1.5 font-mono text-xs text-bone/90 hover:border-signal/50 hover:text-signal transition-colors cursor-default bg-panel/30"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
           </div>

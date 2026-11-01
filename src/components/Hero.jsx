@@ -69,7 +69,7 @@ export default function Hero() {
           {/* Dual-style Dynamic <h1> */}
           <h1
             data-hero="fade"
-            className="text-[clamp(2.4rem,6.2vw,6.8rem)] font-bold uppercase leading-[0.9] tracking-[-0.04em] flex flex-col"
+            className="text-[clamp(2.1rem,6.2vw,6.8rem)] font-bold uppercase leading-[0.9] tracking-[-0.04em] flex flex-col"
           >
             <ScrambleText
               trigger="mount"

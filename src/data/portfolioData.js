@@ -48,11 +48,6 @@ export const aboutContent = {
   heading: "Curious by nature. Building through practice.",
   paragraph:
     "I'm a developer focused on turning ideas into functional, user-friendly web applications. My foundation in computer applications has introduced me to programming, databases, and software development.\n\nCurrently, I'm developing my skills in Java Full Stack Development at TAP Academy, Bengaluru. I enjoy working on practical projects, understanding how applications work behind the scenes, and improving my problem-solving abilities.",
-  stats: [
-    { value: 10, suffix: "+", label: "Technologies & Tools Explored" },
-    { value: 2, suffix: "", label: "Featured Projects" },
-    { value: 2026, suffix: "", label: "BCA Graduate" },
-  ],
 }
 
 export const skillGroups = [
