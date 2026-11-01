@@ -9,6 +9,11 @@ export default function Footer() {
     { label: 'Instagram', url: socialLinks.instagram },
   ].filter((item) => Boolean(item.url && item.url.trim()))
 
+  // Split brand name so it gracefully wraps to two centered lines on small screens if needed
+  const brandParts = (personalInfo.brandName || '').trim().split(' ')
+  const firstWord = brandParts[0] || ''
+  const remainingWords = brandParts.slice(1).join(' ') || ''
+
   return (
     <footer className="w-full overflow-hidden border-t border-bone/10 bg-ink px-5 md:px-10 pt-16 pb-8">
       <div className="max-w-[1440px] mx-auto">
@@ -75,8 +80,9 @@ export default function Footer() {
           className="w-full text-center overflow-hidden my-6 md:my-10 select-none pointer-events-none"
           aria-hidden="true"
         >
-          <span className="block uppercase whitespace-nowrap text-[13.5vw] font-bold leading-none tracking-[-0.05em] text-bone/[0.05]">
-            {personalInfo.brandName}
+          <span className="block uppercase text-center font-bold leading-tight md:leading-none tracking-[-0.04em] text-bone/[0.05] text-[clamp(2.2rem,7.2vw,7.5rem)]">
+            <span className="block sm:inline sm:mr-[0.3em]">{firstWord}</span>
+            <span className="block sm:inline">{remainingWords}</span>
           </span>
         </div>
 
