@@ -77,10 +77,10 @@ export default function Footer() {
 
         {/* Large Decorative Watermark Brand */}
         <div
-          className="w-full text-center overflow-hidden my-6 md:my-10 select-none pointer-events-none"
+          className="@container w-full text-center overflow-hidden my-6 md:my-10 select-none pointer-events-none"
           aria-hidden="true"
         >
-          <span className="block uppercase text-center font-bold leading-tight md:leading-none tracking-[-0.04em] text-bone/[0.05] text-[clamp(2.2rem,7.2vw,7.5rem)]">
+          <span className="block uppercase text-center font-bold leading-tight sm:leading-none tracking-[-0.04em] text-bone/[0.05] text-[clamp(2.5rem,14.5cqw,3.8rem)] sm:text-[clamp(3.8rem,10.5cqw,9rem)] sm:whitespace-nowrap">
             <span className="block sm:inline sm:mr-[0.3em]">{firstWord}</span>
             <span className="block sm:inline">{remainingWords}</span>
           </span>
