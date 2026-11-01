@@ -6,7 +6,7 @@
 export const personalInfo = {
   name: "Shek Sataruzama",
   brandName: "Shek Sataruzama",
-  role: "Java Full Stack Developer (In Training)",
+  role: "Aspiring Java Full Stack Developer",
   city: "Bengaluru, India",
   timezone: "Asia/Kolkata", // IANA timezone used by the live clock in the HUD
   email: "shakesatharuzama@gmail.com",
@@ -33,13 +33,11 @@ export const navLinks = [
 ]
 
 export const heroContent = {
-  eyebrow: "PORTFOLIO — 2026",
+  eyebrow: "DEVELOPER PORTFOLIO / 2026",
   intro:
-    "I am a BCA graduate training in Java Full Stack Development at TAP Academy, Bengaluru. I have built responsive web applications with React, JavaScript, and HTML/CSS.",
+    "I'm a BCA graduate and aspiring Java Full Stack Developer, currently training at TAP Academy in Bengaluru. I build responsive web applications using React, JavaScript, HTML, and CSS while strengthening my Java, SQL, and problem-solving skills.",
   statusLines: [
-    "Building with React",
-    "Learning Data Structures & Algorithms",
-    "Learning Java Full Stack",
+    "Learning Java & DSA",
   ],
   ctaPrimary: { label: "View projects", href: "#projects" },
   ctaSecondary: { label: "Get in touch", href: "#contact" },
@@ -47,21 +45,22 @@ export const heroContent = {
 
 export const aboutContent = {
   label: "01 / About",
-  heading: "Learning, Building, and Growing as a Developer",
+  heading: "Curious by nature. Building through practice.",
   paragraph:
-    "I am a Bachelor of Computer Applications graduate from SDHR Degree College, Tirupati. Currently, I am pursuing Java Full Stack Development training at TAP Academy, Bengaluru. I have experience building responsive web applications using HTML, CSS, JavaScript, and React. I enjoy solving problems, exploring new technologies, and improving my programming skills through practical projects.",
+    "I'm a developer focused on turning ideas into functional, user-friendly web applications. My foundation in computer applications has introduced me to programming, databases, and software development.\n\nCurrently, I'm developing my skills in Java Full Stack Development at TAP Academy, Bengaluru. I enjoy working on practical projects, understanding how applications work behind the scenes, and improving my problem-solving abilities.",
   stats: [
-    { value: 10, suffix: "+", label: "Technologies & Tools" },
-    { value: 3, suffix: "", label: "Years of BCA Education" },
-    { value: 2, suffix: "+", label: "Web Applications Built" },
+    { value: 10, suffix: "+", label: "Technologies & Tools Explored" },
+    { value: 2, suffix: "", label: "Featured Projects" },
+    { value: 2026, suffix: "", label: "BCA Graduate" },
   ],
 }
 
 export const skillGroups = [
-  { title: "Programming", items: ["Java", "Python"] },
-  { title: "Frontend", items: ["HTML5", "CSS3", "JavaScript", "React"] },
-  { title: "Database", items: ["MySQL"] },
-  { title: "Tools & AI", items: ["VS Code", "Git", "GitHub", "npm", "Claude", "ChatGPT"] },
+  { title: "Languages", items: ["Java", "JavaScript", "Python"] },
+  { title: "Frontend", items: ["HTML5", "CSS3", "React.js"] },
+  { title: "Database", items: ["MySQL", "SQL"] },
+  { title: "Developer Tools", items: ["Git", "GitHub", "VS Code", "npm"] },
+  { title: "AI-Assisted Development", items: ["Claude", "ChatGPT"] },
 ]
 
 export const projects = [
@@ -70,7 +69,7 @@ export const projects = [
     number: "01",
     title: "E-Commerce Web Application",
     description:
-      "A responsive e-commerce frontend application featuring product browsing, shopping cart functionality, checkout, order management, and order tracking.",
+      "A React-based e-commerce application designed to provide an intuitive shopping experience, with product browsing, cart management, and a responsive user interface.",
     tags: ["React.js", "JavaScript", "React Router"],
     year: "2026",
     liveUrl: "",
@@ -81,7 +80,7 @@ export const projects = [
     number: "02",
     title: "To-Do List Application",
     description:
-      "A responsive task management application that allows users to add, complete, and delete tasks using JavaScript DOM manipulation and event handling.",
+      "A lightweight task management application built with HTML, CSS, and JavaScript, allowing users to create, organize, complete, and remove daily tasks.",
     tags: ["HTML5", "CSS3", "JavaScript"],
     year: "2026",
     liveUrl: "",
@@ -92,10 +91,10 @@ export const projects = [
 export const experience = [
   {
     period: "2026 — Present",
-    role: "Java Full Stack Developer (In Training)",
+    role: "Java Full Stack Development Training",
     org: "TAP Academy",
     description:
-      "Currently learning full-stack development technologies, including Core and Advanced Java, Spring Boot, React, and MySQL for building web applications.",
+      "Pursuing Java Full Stack Development training, focusing on Java programming, SQL, frontend technologies, and practical application development.",
   },
   {
     period: "2023 — 2026",
@@ -123,11 +122,11 @@ export const experience = [
 export const contactContent = {
   label: "04 / Contact",
   heading: "Let's build something.",
-  note: "Have a role, a project or a question? Send a message — I reply within a day.",
+  note: "I'm open to internships, entry-level developer opportunities, and collaborations. Have an opportunity or an idea? Feel free to reach out.",
 }
 
 export const footerContent = {
-  tagline: "Designed & built by hand.",
+  tagline: "Designed and developed with React, creativity, and AI-assisted tools.",
 }
 
 // EmailJS — values come from .env.local (variables must start with VITE_)

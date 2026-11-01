@@ -138,7 +138,7 @@ export default function About() {
             {/* Paragraph */}
             <p
               data-about="reveal"
-              className="text-lg md:text-xl leading-relaxed text-bone/75 max-w-2xl mb-10"
+              className="text-lg md:text-xl leading-relaxed text-bone/75 max-w-2xl mb-10 whitespace-pre-line"
             >
               {aboutContent.paragraph}
             </p>
