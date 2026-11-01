@@ -56,9 +56,9 @@ export default function Hero() {
       className="hud-grid min-h-screen flex flex-col justify-between overflow-hidden px-5 md:px-10 pt-24 pb-10"
     >
       {/* Central Interactive Grid */}
-      <div className="w-full max-w-[1440px] mx-auto my-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] items-center gap-10">
+      <div className="w-full max-w-[1440px] mx-auto my-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] items-center gap-10 lg:gap-14 xl:gap-20">
         {/* LEFT Column: HUD Identity, Scrambled Title, Role, Description, CTAs */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 w-full">
           {/* Eyebrow Label */}
           <div data-hero="fade">
             <span className="font-mono text-xs uppercase tracking-[0.3em] text-signal font-medium">
@@ -69,20 +69,20 @@ export default function Hero() {
           {/* Dual-style Dynamic <h1> */}
           <h1
             data-hero="fade"
-            className="text-[clamp(3.2rem,11vw,9.5rem)] font-bold uppercase leading-[0.88] tracking-[-0.04em] flex flex-col"
+            className="text-[clamp(2.4rem,6.2vw,6.8rem)] font-bold uppercase leading-[0.9] tracking-[-0.04em] flex flex-col"
           >
             <ScrambleText
               trigger="mount"
               delay={200}
               text={firstName}
-              className="text-bone"
+              className="text-bone whitespace-nowrap"
             />
             {restName && (
               <ScrambleText
                 trigger="mount"
                 delay={500}
                 text={restName}
-                className="text-transparent [-webkit-text-stroke:1.5px_#e8e6df]"
+                className="text-transparent [-webkit-text-stroke:1.5px_#e8e6df] whitespace-nowrap"
               />
             )}
           </h1>
@@ -128,8 +128,8 @@ export default function Hero() {
         </div>
 
         {/* RIGHT Column: 3D Signal Core Canvas in HUD Frame */}
-        <div data-hero="fade" className="w-full">
-          <div className="hud-frame border border-bone/10 bg-panel/40 h-[48vh] min-h-[320px] lg:h-[70vh] relative flex items-center justify-center overflow-hidden">
+        <div data-hero="fade" className="w-full flex items-center justify-center">
+          <div className="hud-frame border border-bone/10 bg-panel/40 w-full h-[40vh] min-h-[280px] sm:min-h-[340px] lg:h-[64vh] max-h-[640px] relative flex items-center justify-center overflow-hidden">
             {/* Top-Left Corner HUD Label */}
             <span
               className="absolute top-3 left-4 pointer-events-none font-mono text-[10px] uppercase tracking-[0.25em] text-dim z-10"

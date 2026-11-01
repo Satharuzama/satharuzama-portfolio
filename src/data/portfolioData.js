@@ -22,7 +22,7 @@ export const academy = {
 export const socialLinks = {
   github: "https://github.com/Satharuzama/",
   linkedin: "https://www.linkedin.com/in/shek-satharuzama",
-  instagram: "",
+  instagram: "https://www.instagram.com/satharuzama/",
 }
 
 export const navLinks = [
