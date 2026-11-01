@@ -2,7 +2,7 @@
 
 A single-page developer portfolio website designed in a dark, motion-led "Signal HUD" technical aesthetic.
 
-**Live site:** [https://YOUR-SITE-URL/](https://YOUR-SITE-URL/)
+**Live site:** [https://shek-sataruzama-portfolio.vercel.app](https://shek-sataruzama-portfolio.vercel.app)
 
 ## Tech Stack
 
