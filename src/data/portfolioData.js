@@ -116,7 +116,7 @@ export const experience = [
     role: "High School",
     org: "Prashanth English Medium High School",
     description:
-      "Completed secondary school education (Class 10).",
+      "Completed secondary school education.",
   },
 ]
 
