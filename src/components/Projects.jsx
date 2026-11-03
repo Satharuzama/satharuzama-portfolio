@@ -158,7 +158,7 @@ export default function Projects() {
                     <img
                       src={imageSrc}
                       alt={project.imageAlt || `${project.title} screenshot`}
-                      className="w-full h-full object-cover object-top grayscale contrast-110 opacity-80 group-hover:grayscale-0 group-hover:contrast-100 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-700 ease-out"
+                      className="w-full h-full object-cover object-top grayscale-0 contrast-100 opacity-100 lg:grayscale lg:contrast-110 lg:opacity-80 lg:group-hover:grayscale-0 lg:group-hover:contrast-100 lg:group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-700 ease-out"
                       loading="lazy"
                       decoding="async"
                     />
