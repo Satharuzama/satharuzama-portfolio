@@ -7,16 +7,26 @@ import ScrambleText from './ScrambleText'
 gsap.registerPlugin(ScrollTrigger)
 
 // Load project images dynamically if available
-const projectImages = import.meta.glob('../assets/projects/project-*.*', {
+const projectImages = import.meta.glob('../assets/projects/*.*', {
   eager: true,
   import: 'default',
 })
 
-function getProjectImage(id) {
-  const match = Object.entries(projectImages).find(([path]) =>
-    path.includes(`/${id}.`),
-  )
-  return match ? match[1] : null
+function getProjectImage(project) {
+  const searchTerms = [
+    project.imageName,
+    project.image,
+    project.id,
+  ].filter(Boolean)
+
+  for (const term of searchTerms) {
+    const match = Object.entries(projectImages).find(([path]) => {
+      const filename = path.split('/').pop().toLowerCase()
+      return filename.startsWith(term.toLowerCase())
+    })
+    if (match) return match[1]
+  }
+  return null
 }
 
 export default function Projects() {
@@ -134,7 +144,7 @@ export default function Projects() {
         className="flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row gap-8 px-5 md:px-10 w-full max-w-[1440px] mx-auto"
       >
         {projects?.map((project) => {
-          const imageSrc = getProjectImage(project.id)
+          const imageSrc = getProjectImage(project)
 
           return (
             <div
@@ -143,13 +153,14 @@ export default function Projects() {
             >
               <div>
                 {/* Visual Cover / HUD Placeholder */}
-                <div className="w-full h-48 md:h-56 bg-ink/70 border border-bone/10 mb-6 overflow-hidden relative flex items-center justify-center">
+                <div className="w-full h-52 sm:h-60 md:h-64 bg-ink/70 border border-bone/10 mb-6 overflow-hidden relative flex items-center justify-center">
                   {imageSrc ? (
                     <img
                       src={imageSrc}
-                      alt={`${project.title} screenshot`}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      alt={project.imageAlt || `${project.title} screenshot`}
+                      className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                       loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className="flex flex-col items-center justify-center font-mono text-xs text-dim p-4 text-center">
@@ -194,16 +205,21 @@ export default function Projects() {
                 </div>
 
                 {/* Links / Status Indicator */}
-                <div className="flex items-center gap-5 pt-4 border-t border-bone/10 font-mono text-xs">
+                <div className="flex items-center gap-4 pt-4 border-t border-bone/10 font-mono text-xs">
                   {project.liveUrl ? (
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-bone hover:text-signal uppercase tracking-wider transition-colors inline-flex items-center gap-1"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-signal/60 bg-signal/10 hover:bg-signal text-signal hover:text-ink font-semibold uppercase tracking-wider transition-colors duration-200 group/btn"
                     >
                       <span>Live Demo</span>
-                      <span aria-hidden="true">↗</span>
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                      >
+                        ↗
+                      </span>
                     </a>
                   ) : null}
 
@@ -212,7 +228,7 @@ export default function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-bone hover:text-signal uppercase tracking-wider transition-colors inline-flex items-center gap-1"
+                      className="border border-bone/20 hover:border-bone/50 text-bone/80 hover:text-bone uppercase tracking-wider px-3.5 py-1.5 transition-colors inline-flex items-center gap-1"
                     >
                       <span>Repository</span>
                       <span aria-hidden="true">↗</span>

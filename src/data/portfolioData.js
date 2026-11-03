@@ -67,8 +67,11 @@ export const projects = [
       "A React-based e-commerce application designed to provide an intuitive shopping experience, with product browsing, cart management, and a responsive user interface.",
     tags: ["React.js", "JavaScript", "React Router"],
     year: "2026",
-    liveUrl: "",
+    liveUrl: "https://satharuzama.github.io/ecommerce/",
     githubUrl: "",
+    imageName: "ecommerce-preview",
+    imageAlt:
+      "E-Commerce Web Application showing product listings, prices, ratings, and shopping cart functionality.",
   },
   {
     id: "project-2",
