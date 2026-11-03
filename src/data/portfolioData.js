@@ -36,7 +36,9 @@ export const heroContent = {
   intro:
     "I'm a BCA graduate and aspiring Java Full Stack Developer, currently training at TAP Academy in Bengaluru. I build responsive web applications using React, JavaScript, HTML, and CSS while strengthening my Java, SQL, and problem-solving skills.",
   statusLines: [
+    "Building with React",
     "Learning Java & DSA",
+    "Learning Full Stack Development",
   ],
   ctaPrimary: { label: "View projects", href: "#projects" },
   ctaSecondary: { label: "Get in touch", href: "#contact" },

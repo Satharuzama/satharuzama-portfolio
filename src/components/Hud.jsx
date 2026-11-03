@@ -15,6 +15,7 @@ export default function Hud() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [statusIndex, setStatusIndex] = useState(0)
+  const [isFading, setIsFading] = useState(false)
   const [timeString, setTimeString] = useState('')
 
   // Track scroll position to apply background blur and border
@@ -27,13 +28,34 @@ export default function Hud() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Cycle through HUD status lines every 3.5s
+  // Cycle through HUD status lines every 4s with a smooth fade transition
   useEffect(() => {
-    if (!heroContent?.statusLines?.length) return
+    const lines = heroContent?.statusLines
+    if (!lines || lines.length <= 1) return
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    let fadeTimeout = null
+
     const statusInterval = setInterval(() => {
-      setStatusIndex((prev) => (prev + 1) % heroContent.statusLines.length)
-    }, 3500)
-    return () => clearInterval(statusInterval)
+      if (prefersReducedMotion) {
+        setStatusIndex((prev) => (prev + 1) % lines.length)
+        return
+      }
+
+      setIsFading(true)
+      fadeTimeout = setTimeout(() => {
+        setStatusIndex((prev) => (prev + 1) % lines.length)
+        setIsFading(false)
+      }, 300)
+    }, 4000)
+
+    return () => {
+      clearInterval(statusInterval)
+      if (fadeTimeout) clearTimeout(fadeTimeout)
+    }
   }, [])
 
   // Live 24-hour clock for the developer's timezone
@@ -85,14 +107,18 @@ export default function Hud() {
         {/* Centre (lg and up): Rotating Status Indicator */}
         {heroContent.statusLines?.length > 0 && (
           <div
-            className="hidden lg:flex items-center gap-2.5"
+            className="hidden lg:flex items-center gap-2.5 w-[290px] flex-shrink-0"
             aria-live="polite"
           >
             <span
-              className="w-1.5 h-1.5 rounded-full bg-signal animate-pulse"
+              className="w-1.5 h-1.5 rounded-full bg-signal animate-pulse flex-shrink-0"
               aria-hidden="true"
             />
-            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
+            <span
+              className={`font-mono text-[11px] uppercase tracking-[0.18em] text-dim whitespace-nowrap transition-opacity duration-300 ease-in-out ${
+                isFading ? 'opacity-0' : 'opacity-100'
+              }`}
+            >
               {currentStatus}
             </span>
           </div>
@@ -137,6 +163,26 @@ export default function Hud() {
           id="mobile-hud-menu"
           className="md:hidden absolute top-16 inset-x-0 bg-ink/95 backdrop-blur-lg border-b border-bone/10 px-6 py-6 flex flex-col"
         >
+          {/* Mobile Rotating Status Indicator */}
+          {heroContent.statusLines?.length > 0 && (
+            <div
+              className="flex items-center gap-2.5 pb-4 mb-4 border-b border-bone/10"
+              aria-live="polite"
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full bg-signal animate-pulse flex-shrink-0"
+                aria-hidden="true"
+              />
+              <span
+                className={`font-mono text-[11px] uppercase tracking-[0.18em] text-dim transition-opacity duration-300 ease-in-out ${
+                  isFading ? 'opacity-0' : 'opacity-100'
+                }`}
+              >
+                {currentStatus}
+              </span>
+            </div>
+          )}
+
           <nav className="flex flex-col mb-6" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <a
