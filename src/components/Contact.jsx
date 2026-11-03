@@ -29,6 +29,23 @@ export default function Contact() {
     e.preventDefault()
     if (!formRef.current) return
 
+    const formData = new FormData(formRef.current)
+    const name = (formData.get('user_name') || '').toString().trim()
+    const email = (formData.get('user_email') || '').toString().trim()
+    const message = (formData.get('message') || '').toString().trim()
+
+    // Frontend validations
+    if (!name || !email || !message) {
+      setTimedStatus('error', '✕ Please complete all required fields.')
+      return
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailPattern.test(email)) {
+      setTimedStatus('error', '✕ Please enter a valid email address.')
+      return
+    }
+
     const { serviceId, templateId, publicKey } = emailjsConfig
     const isConfigured =
       Boolean(serviceId && templateId && publicKey) &&
@@ -38,12 +55,7 @@ export default function Contact() {
 
     if (!isConfigured) {
       // Fallback: trigger mailto with formatted subject and body
-      const formData = new FormData(formRef.current)
-      const name = formData.get('user_name') || ''
-      const email = formData.get('user_email') || ''
-      const message = formData.get('message') || ''
-
-      const subject = encodeURIComponent('Portfolio contact')
+      const subject = encodeURIComponent(`Portfolio contact from ${name}`)
       const body = encodeURIComponent(
         `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       )
@@ -137,13 +149,6 @@ export default function Contact() {
                 {personalInfo.email}
               </a>
             </div>
-
-            {/* Optional Phone */}
-            {personalInfo.phone && (
-              <p className="font-mono text-sm text-dim">
-                {personalInfo.phone}
-              </p>
-            )}
 
             {/* Social Links Row */}
             {activeSocials.length > 0 && (

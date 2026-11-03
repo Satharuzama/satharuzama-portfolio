@@ -10,7 +10,6 @@ export const personalInfo = {
   city: "Bengaluru, India",
   timezone: "Asia/Kolkata", // IANA timezone used by the live clock in the HUD
   email: "shakesatharuzama@gmail.com",
-  phone: "7601091393",
   availability: "Open to internships & entry-level developer roles",
 }
 
@@ -67,8 +66,9 @@ export const projects = [
       "A React-based e-commerce application designed to provide an intuitive shopping experience, with product browsing, cart management, and a responsive user interface.",
     tags: ["React.js", "JavaScript", "React Router"],
     year: "2026",
+    status: "In Development",
     liveUrl: "https://satharuzama.github.io/ecommerce/",
-    githubUrl: "",
+    githubUrl: "https://github.com/Satharuzama/ecommerce",
     imageName: "ecommerce-preview",
     imageAlt:
       "E-Commerce Web Application showing product listings, prices, ratings, and shopping cart functionality.",
@@ -81,8 +81,9 @@ export const projects = [
       "A lightweight task management application built with HTML, CSS, and JavaScript, allowing users to create, organize, complete, and remove daily tasks.",
     tags: ["HTML5", "CSS3", "JavaScript"],
     year: "2026",
+    status: "In Development",
     liveUrl: "",
-    githubUrl: "",
+    githubUrl: "https://github.com/Satharuzama/TODO_LIST",
   },
 ]
 

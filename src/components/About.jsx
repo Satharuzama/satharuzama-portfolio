@@ -119,12 +119,9 @@ export default function About() {
             {/* Technical Skill Groups Grid */}
             {skillGroups?.length > 0 && (
               <div data-about="reveal" className="flex flex-col gap-4">
-                <div className="flex items-center justify-between border-b border-bone/10 pb-3">
+                <div className="border-b border-bone/10 pb-3">
                   <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal font-medium">
                     Technical Capabilities
-                  </span>
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-dim">
-                    {skillGroups.length} Core Domains
                   </span>
                 </div>
 

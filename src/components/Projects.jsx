@@ -205,42 +205,50 @@ export default function Projects() {
                 </div>
 
                 {/* Links / Status Indicator */}
-                <div className="flex items-center gap-4 pt-4 border-t border-bone/10 font-mono text-xs">
-                  {project.liveUrl ? (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-signal/60 bg-signal/10 hover:bg-signal text-signal hover:text-ink font-semibold uppercase tracking-wider transition-colors duration-200 group/btn"
-                    >
-                      <span>Live Demo</span>
-                      <span
-                        aria-hidden="true"
-                        className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-bone/10 font-mono text-xs">
+                  <div className="flex flex-wrap items-center gap-3">
+                    {project.liveUrl ? (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-signal/60 bg-signal/15 hover:bg-signal text-signal hover:text-ink font-semibold uppercase tracking-wider transition-colors duration-200 group/btn"
                       >
-                        ↗
-                      </span>
-                    </a>
-                  ) : null}
+                        <span>Live Demo</span>
+                        <span
+                          aria-hidden="true"
+                          className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                        >
+                          ↗
+                        </span>
+                      </a>
+                    ) : null}
 
-                  {project.githubUrl ? (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border border-bone/20 hover:border-bone/50 text-bone/80 hover:text-bone uppercase tracking-wider px-3.5 py-1.5 transition-colors inline-flex items-center gap-1"
-                    >
-                      <span>Repository</span>
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                  ) : null}
+                    {project.githubUrl ? (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border border-bone/25 hover:border-signal text-bone hover:text-signal uppercase tracking-wider px-3.5 py-1.5 transition-colors inline-flex items-center gap-1.5 group/code"
+                      >
+                        <span>Source Code</span>
+                        <span
+                          aria-hidden="true"
+                          className="transition-transform duration-200 group-hover/code:translate-x-0.5 group-hover/code:-translate-y-0.5"
+                        >
+                          ↗
+                        </span>
+                      </a>
+                    ) : null}
+                  </div>
 
-                  {!project.liveUrl && !project.githubUrl && (
-                    <div className="flex items-center gap-2 text-dim font-mono text-[11px] uppercase tracking-wider">
-                      <span className="w-1.5 h-1.5 rounded-full bg-signal/80 animate-pulse" aria-hidden="true" />
-                      <span>In Active Development</span>
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2 text-dim font-mono text-[11px] uppercase tracking-wider">
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-signal/80 animate-pulse"
+                      aria-hidden="true"
+                    />
+                    <span>{project.status || 'In Development'}</span>
+                  </div>
                 </div>
               </div>
             </div>
