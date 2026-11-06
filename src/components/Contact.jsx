@@ -159,6 +159,7 @@ export default function Contact() {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`${item.label} profile of ${personalInfo.name}`}
                     className="group border border-bone/15 bg-panel/40 px-3.5 py-2 font-mono text-xs uppercase tracking-wider text-bone/80 hover:text-signal hover:border-signal/50 hover:bg-panel/80 transition-all inline-flex items-center gap-2"
                   >
                     <span className="text-dim group-hover:text-signal transition-colors">

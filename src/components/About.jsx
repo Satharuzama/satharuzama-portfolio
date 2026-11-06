@@ -71,7 +71,9 @@ export default function About() {
               {portraitSrc ? (
                 <img
                   src={portraitSrc}
-                  alt={`${personalInfo.name} — ${personalInfo.role}`}
+                  alt={`${personalInfo.name} (Satharuzama) — Aspiring Java Full Stack Developer based in Bengaluru`}
+                  width="420"
+                  height="525"
                   className="w-full h-full object-cover grayscale contrast-125 transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
@@ -120,9 +122,9 @@ export default function About() {
             {skillGroups?.length > 0 && (
               <div data-about="reveal" className="flex flex-col gap-4">
                 <div className="border-b border-bone/10 pb-3">
-                  <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal font-medium">
+                  <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-signal font-medium">
                     Technical Capabilities
-                  </span>
+                  </h3>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-bone/10 border border-bone/10">

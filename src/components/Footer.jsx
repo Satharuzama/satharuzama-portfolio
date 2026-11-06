@@ -152,6 +152,7 @@ export default function Footer() {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${item.label} profile of ${personalInfo.name}`}
                   className="text-bone/75 hover:text-signal transition-colors text-sm flex items-center gap-1 w-fit"
                 >
                   <span>{item.label}</span>
@@ -194,6 +195,7 @@ export default function Footer() {
               href={academy.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${academy.name} placement training website`}
               className="text-bone hover:text-signal transition-colors underline underline-offset-4 decoration-bone/30 hover:decoration-signal"
             >
               {academy.name}

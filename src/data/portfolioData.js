@@ -7,7 +7,7 @@ export const personalInfo = {
   name: "Shek Sataruzama",
   brandName: "Shek Sataruzama",
   role: "Aspiring Java Full Stack Developer",
-  city: "Bengaluru, India",
+  city: "Bengaluru, Karnataka, India",
   timezone: "Asia/Kolkata", // IANA timezone used by the live clock in the HUD
   email: "shakesatharuzama@gmail.com",
   availability: "Open to internships & entry-level developer roles",
@@ -19,8 +19,8 @@ export const academy = {
 }
 
 export const socialLinks = {
-  github: "https://github.com/Satharuzama/",
-  linkedin: "https://www.linkedin.com/in/shek-satharuzama",
+  github: "https://github.com/Satharuzama",
+  linkedin: "https://www.linkedin.com/in/shek-sataruzama/",
   instagram: "https://www.instagram.com/satharuzama/",
 }
 
@@ -34,7 +34,7 @@ export const navLinks = [
 export const heroContent = {
   eyebrow: "DEVELOPER PORTFOLIO / 2026",
   intro:
-    "I'm a BCA graduate and aspiring Java Full Stack Developer, currently training at TAP Academy in Bengaluru. I build responsive web applications using React, JavaScript, HTML, and CSS while strengthening my Java, SQL, and problem-solving skills.",
+    "I'm Shek Sataruzama (also known as Sathar / Satharuzama), a BCA graduate and aspiring Java Full Stack Developer based in Bengaluru. Currently undergoing placement training at TAP Academy, I build responsive, interactive web applications with React, JavaScript, and Java while strengthening my core programming, SQL databases, and problem-solving skills.",
   statusLines: [
     "Building with React",
     "Learning Java & DSA",
@@ -48,7 +48,7 @@ export const aboutContent = {
   label: "01 / About",
   heading: "Curious by nature. Building through practice.",
   paragraph:
-    "I'm a developer focused on turning ideas into functional, user-friendly web applications. My foundation in computer applications has introduced me to programming, databases, and software development.\n\nCurrently, I'm developing my skills in Java Full Stack Development at TAP Academy, Bengaluru. I enjoy working on practical projects, understanding how applications work behind the scenes, and improving my problem-solving abilities.",
+    "I am Shek Sataruzama, a Bachelor of Computer Applications (BCA) graduate and aspiring Java Full Stack Developer based in Bengaluru, Karnataka, India.\n\nCurrently, I am undergoing comprehensive Java Full Stack Development training at TAP Academy, Bengaluru. My coursework and personal projects center on mastering Core Java, Object-Oriented Programming (OOP), Data Structures and Algorithms (DSA), and relational databases like MySQL, alongside building modern, responsive frontend user interfaces using React, JavaScript, and Tailwind CSS.\n\nWhether developing full-stack web applications or solving algorithmic problems, I take pride in writing clean, structured code and continuously building practical software projects.",
 }
 
 export const skillGroups = [
@@ -65,27 +65,29 @@ export const projects = [
     number: "01",
     title: "E-Commerce Web Application",
     description:
-      "A React-based e-commerce application designed to provide an intuitive shopping experience, with product browsing, cart management, and a responsive user interface.",
-    tags: ["React.js", "JavaScript", "React Router"],
+      "A React-based e-commerce application designed to provide an intuitive shopping experience, featuring product catalog browsing, cart management, and a responsive user interface.",
+    tags: ["React.js", "JavaScript", "HTML5", "CSS3", "React Router"],
     year: "2026",
     status: "In Development",
     liveUrl: "https://satharuzama.github.io/ecommerce/",
     githubUrl: "https://github.com/Satharuzama/ecommerce",
     imageName: "ecommerce-preview",
     imageAlt:
-      "E-Commerce Web Application showing product listings, prices, ratings, and shopping cart functionality.",
+      "E-Commerce Web Application by Shek Sataruzama showing product listings, prices, ratings, and shopping cart functionality.",
   },
   {
     id: "project-2",
     number: "02",
     title: "To-Do List Application",
     description:
-      "A lightweight task management application built with HTML, CSS, and JavaScript, allowing users to create, organize, complete, and remove daily tasks.",
+      "A lightweight, focused task management application built with HTML, CSS, and modern JavaScript, allowing users to create, organize, complete, and remove daily tasks.",
     tags: ["HTML5", "CSS3", "JavaScript"],
     year: "2026",
     status: "In Development",
     liveUrl: "",
     githubUrl: "https://github.com/Satharuzama/TODO_LIST",
+    imageAlt:
+      "To-Do List task management application interface built with HTML5, CSS3, and JavaScript by Shek Sataruzama.",
   },
 ]
 
@@ -93,16 +95,16 @@ export const experience = [
   {
     period: "2026 — Present",
     role: "Java Full Stack Development Training",
-    org: "TAP Academy",
+    org: "TAP Academy, Bengaluru",
     description:
-      "Pursuing Java Full Stack Development training, focusing on Java programming, SQL, frontend technologies, and practical application development.",
+      "Pursuing intensive Java Full Stack Development training at TAP Academy in Bengaluru, focusing on Core Java, OOP, Data Structures & Algorithms, MySQL database management, and modern frontend application development with React and JavaScript.",
   },
   {
     period: "2023 — 2026",
     role: "Bachelor of Computer Applications (BCA)",
     org: "SDHR Degree College, Tirupati",
     description:
-      "Completed my Bachelor of Computer Applications, gaining foundational knowledge in programming, database management, software engineering, and web development.",
+      "Completed Bachelor of Computer Applications (BCA), gaining foundational knowledge in programming, database management systems (DBMS), software engineering, and web development.",
   },
   {
     period: "2021 — 2023",

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { projects } from '../data/portfolioData'
+import { personalInfo, projects } from '../data/portfolioData'
 import ScrambleText from './ScrambleText'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -157,7 +157,9 @@ export default function Projects() {
                   {imageSrc ? (
                     <img
                       src={imageSrc}
-                      alt={project.imageAlt || `${project.title} screenshot`}
+                      alt={project.imageAlt || `${project.title} — developed by ${personalInfo.name}`}
+                      width="640"
+                      height="360"
                       className="w-full h-full object-cover object-top grayscale-0 contrast-100 opacity-100 lg:grayscale lg:contrast-110 lg:opacity-80 lg:group-hover:grayscale-0 lg:group-hover:contrast-100 lg:group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-700 ease-out"
                       loading="lazy"
                       decoding="async"
@@ -212,6 +214,7 @@ export default function Projects() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Open live demo of ${project.title} in a new tab`}
                         className="inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-signal/60 bg-signal/15 hover:bg-signal text-signal hover:text-ink font-semibold uppercase tracking-wider transition-colors duration-200 group/btn"
                       >
                         <span>Live Demo</span>
@@ -229,6 +232,7 @@ export default function Projects() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`View source code of ${project.title} on GitHub in a new tab`}
                         className="border border-bone/25 hover:border-signal text-bone hover:text-signal uppercase tracking-wider px-3.5 py-1.5 transition-colors inline-flex items-center gap-1.5 group/code"
                       >
                         <span>Source Code</span>
